@@ -1,4 +1,4 @@
-# BuenasShop — React (Etapa 1: Props + Children)
+# BuenasShop — React
 
 Este repositório é um tutorial para construir uma mini loja virtual (e-commerce) em React.
 
@@ -31,7 +31,7 @@ npm run dev
 
 ## 1) Preparar a MockAPI (Produtos)
 
-1.1 Criar o resource products
+### 1.1 Criar o resource products
 
 No painel da MockAPI:
 
@@ -46,23 +46,31 @@ Campos sugeridos:
 - description (string)
 
 
+---
 
-1.2 URL base
+### 1.2 URL base
 
+```
 https://SEU-PROJETO.mockapi.io/api/
+```
 
 O endpoint de produtos será:
 
+```
 GET https://SEU-PROJETO.mockapi.io/api/products
+```
 
 
+---
 
-1.3 Popular com 6 produtos (via Thunder Client / Postman / Insomnia)
+### 1.3 Popular com 6 produtos (via Thunder Client / Postman / Insomnia)
 
 Faça 6 requests POST:
 
-POST https://SEU-PROJETO.mockapi.io/api/products
+```
+POST https://SEU-PROJETO.mockapi.io/api/products  
 Header: Content-Type: application/json
+```
 
 Body (JSON)
 
@@ -74,6 +82,8 @@ Body (JSON)
     "description": "Switch tátil, layout ABNT2."
 }
 ```
+
+Repita para:
 
 ```json
 {
@@ -128,18 +138,16 @@ GET /products deve retornar a lista
 
 ## ETAPA 1
 
-Props + Children + MockAPI
+### Props + Children + MockAPI
 
 **Objetivo desta etapa**
 
 - Renderizar cards de produtos com map() (props)
-- Abrir detalhes do produto ao clicar (sem estado) usando <details>/<summary>
+- Abrir detalhes do produto ao clicar (sem estado) usando \<details>/\<summary>
 - Botão Comprar chama callback via props (onBuy(product))
 - Carrinho não funciona ainda (placeholder)
 
-Por que buscamos produtos sem useEffect?
 
-Para manter a aula 100% em props/children, vamos fazer o fetch antes do React renderizar (no main.jsx), e passar os produtos para o App via prop.
 
 ## 2) Estrutura de pastas
 
@@ -160,7 +168,7 @@ src/
 
 ## 3) Implementar os componentes UI (children)
 
-3.1 src/components/ui/Card.jsx
+### 3.1 src/components/ui/Card.jsx
 
 ```jsx
 export default function Card({ children }) {
@@ -168,15 +176,15 @@ export default function Card({ children }) {
 }
 ```
 
-3.2 src/components/ui/Section.jsx
+### 3.2 src/components/ui/Section.jsx
 
 ```jsx
 export default function Section({ title, subtitle, children }) {
   return (
     <section className="section">
-      <header className="section__header">
-        <h2 className="section__title">{title}</h2>
-        {subtitle && <p className="section__subtitle">{subtitle}</p>}
+      <header className="section-header">
+        <h2 className="section-title">{title}</h2>
+        {subtitle && <p className="section-subtitle">{subtitle}</p>}
       </header>
       <div>{children}</div>
     </section>
@@ -186,7 +194,7 @@ export default function Section({ title, subtitle, children }) {
 
 ## 4) Implementar a Vitrine (props) e Detalhes sem estado (details/summary)
 
-4.1 src/components/shop/ProductCard.jsx
+### 4.1 src/components/shop/ProductCard.jsx
 
 ```jsx
 import Card from "../ui/Card";
@@ -195,19 +203,19 @@ import Button from "../ui/Button";
 export default function ProductCard({ product, onBuy }) {
   return (
     <details className="product">
-      <summary className="product__summary">
+      <summary className="product-summary">
         <Card>
           <small className="muted">#{product.tag}</small>
-          <h3 className="product__name">{product.name}</h3>
+          <h3 className="product-name">{product.name}</h3>
           <strong>R$ {Number(product.price).toFixed(2)}</strong>
-          <p className="muted product__hint">Clique para ver detalhes</p>
+          <p className="muted product-hint">Clique para ver detalhes</p>
         </Card>
       </summary>
 
       <Card>
-        <p className="product__desc">{product.description || "Sem descrição."}</p>
+        <p className="product-desc">{product.description || "Sem descrição."}</p>
 
-        <div className="product__actions">
+        <div className="product-actions">
           <Button onClick={() => onBuy(product)}>Comprar</Button>
         </div>
       </Card>
@@ -216,7 +224,7 @@ export default function ProductCard({ product, onBuy }) {
 }
 ```
 
-4.2 src/components/shop/ProductGrid.jsx
+### 4.2 src/components/shop/ProductGrid.jsx
 
 ```jsx
 import ProductCard from "./ProductCard";
@@ -347,11 +355,11 @@ body {
   margin-bottom: 14px;
 }
 
-.section__title {
+.section-title {
     margin: 0;
 }
 
-.section__subtitle {
+.section-subtitle {
     margin: 6px 0 0;
 }
 
@@ -381,25 +389,25 @@ body {
     border-radius: 12px;
 }
 
-.product__summary {
+.product-summary {
     list-style: none;
     cursor: pointer;
 }
 
-.product__summary::-webkit-details-marker {
+.product-summary::-webkit-details-marker {
     display: none;
 }
 
-.product__name {
+.product-name {
     margin: 6px 0 10px;
 }
 
-.product__hint {
+.product-hint {
     margin: 8px 0 0;
     font-size: 12px;
 }
 
-.product__desc {
+.product-desc {
     margin: 0 0 10px;
 }
 
