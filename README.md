@@ -270,7 +270,7 @@ export default function App({ products }) {
   return (
     <div className="page">
       <header className="top">
-        <h1>MiniShop</h1>
+        <h1>Buenas Shop</h1>
         <p className="muted">Etapa 1: props + children + MockAPI (sem hooks)</p>
       </header>
 
