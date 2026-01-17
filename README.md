@@ -192,6 +192,20 @@ export default function Section({ title, subtitle, children }) {
 }
 ```
 
+### 3.3 src/components/ui/Button.jsx
+
+```jsx
+export default function Button({ onClick, children }) {
+  return (
+    <button className="btn" onClick={onClick}>
+      {children}
+    </button>
+  );
+}
+```
+
+
+
 ## 4) Implementar a Vitrine (props) e Detalhes sem estado (details/summary)
 
 ### 4.1 src/components/shop/ProductCard.jsx
